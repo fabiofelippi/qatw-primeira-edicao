@@ -59,5 +59,12 @@ O projeto utiliza Docker Compose para gerenciar os serviços necessários para o
    npx playwright test --ui
    ```
 
+## Conexão com a base de dados
+
+1. Instale o PG Promise no path do projeto
+   ```sh
+   npm i pg-promise
+   ```
+
 ## 📄 Licença
 Este projeto está sob a licença MIT.
