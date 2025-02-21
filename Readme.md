@@ -73,5 +73,25 @@ O projeto utiliza Docker Compose para gerenciar os serviços necessários para o
    npm i bullmq
    ```
 
+## AScessar o Jenkins
+
+1 . Acessar o motor do Jenkins no browser
+   ```
+   http://jenkins-server:8080/
+   ```
+2. Copiar o PATH do arquivo de destrave do Jenkins (no caso do curso, este abaixo mas é informado quando se acessa o link acima)
+   ```
+   /var/jenkins_home/secrets/initialAdminPassword
+   ```
+3. Entra no bash do container do Jenkins com o abaixo:
+```
+docker exec -it jenkins-server bash
+```
+4. Extrai a senha por meio do comando abaixo:
+```
+cat /var/jenkins_home/secrets/initialAdminPassword
+```
+5. Copia e cola para o motor do Jenkins no browser
+
 ## 📄 Licença
 Este projeto está sob a licença MIT.
