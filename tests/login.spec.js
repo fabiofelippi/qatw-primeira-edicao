@@ -5,6 +5,8 @@ import { obterCodigo2FA } from '../support/db';
 import { LoginPage } from '../pages/LoginPage';
 import { DashPage } from '../pages/DashPage';
 
+import { cleanJobs, getJob } from '../support/redis';
+
 test('Nao deve logar quando o codigo de autenticacao e invalido', async ({ page }) => {
   
   const loginPage = new LoginPage(page)
@@ -31,19 +33,21 @@ test('Deve acessar a conta do usuario', async ({ page }) => {
     cpf: '00000014141',
     senha: '147258'
   }
+
+  await cleanJobs()
   
   await loginPage.acessaPagina()
   await loginPage.informaCpf(usuario.cpf)
   await loginPage.informaSenha(usuario.senha)
 
-  // temporario
-  await page.waitForTimeout(3000)
-  const codigo = await obterCodigo2FA()
+  // checkpoint
+  await page.getByRole('heading', {name: 'Verificação em duas etapas'})
+    .waitFor({timeout: 3000})
+
+  const codigo = await getJob()
+  // const codigo = await obterCodigo2FA(usuario.cpf)
 
   await loginPage.informa2FA(codigo)
 
-  // temporario
-  await page.waitForTimeout(2000)
-
-  expect(await dashPage.obterSaldo()).toHaveText('R$ 5.000,00')
+  await expect(await dashPage.obterSaldo()).toHaveText('R$ 5.000,00')
 });

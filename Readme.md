@@ -66,5 +66,12 @@ O projeto utiliza Docker Compose para gerenciar os serviços necessários para o
    npm i pg-promise
    ```
 
+## Pacote de gerenciamento do Redis, o BullMQ
+
+1. Instale o BullMQ no path do projeto
+   ```sh
+   npm i bullmq
+   ```
+
 ## 📄 Licença
 Este projeto está sob a licença MIT.
